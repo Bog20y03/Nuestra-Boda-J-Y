@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Nuestra Boda</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&display=swap" rel="stylesheet">
+
+<style>
+
+/* ==============================================
+   🔹 CONFIGURACIÓN GLOBAL Y VARIABLES
+   ============================================== */
+:root {
+  --beige: #fbf7f5;
+  --dorado: #b68c5a;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #f8ede3, #fdf6f0);
+}
+
+.contenedor {
+  max-width: 100%;
+  margin: auto;
+  background: white;
+  padding: 0;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+
+/* ==============================================
+   🔹 ESTILOS DE TEXTO Y COMPONENTES REUTILIZABLES
+   ============================================== */
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 46px;
+  color: #efb810 ;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.detalle {
+  font-size: 17px;
+  margin: 8px 0;
+}
+
+.boton {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 28px;
+  border-radius: 30px;
+  background: #b68c5a;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.opciones {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.opciones button {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #f7b2d9, #cdb4db);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+
+/* ==============================================
+   🔹 ESTILOS GENERALES DE FORMULARIOS
+   ============================================== */
+form {
+  margin-top: 25px;
+  text-align: left;
+}
+
+label {
+  font-size: 14px;
+  color: #00674F;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px;
+  border-radius: 12px;
+  border: 1px solid #f1c6d8;
+}
+
+.enviar {
+  width: 100%;
+  padding: 12px;
+  background: #b68c5a;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 17px;
+}
+
+
+/* ==============================================
+   🔹 SECCIÓN: HERO (PORTADA PRINCIPAL)
+   ============================================== */
+.hero {
+  position: relative;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.15),
+    rgba(0,0,0,0.55)
+  );
+}
+
+.hero-text {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+}
+
+.hero-text .subtitulo {
+  letter-spacing: 3px;
+  font-size: 14px;
+}
+
+.hero-text h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 52px;
+  margin: 10px 0;
+}
+
+.hero-text .fecha {
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.scroll {
+  position: absolute;
+  bottom: 1px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  z-index: 2;
+  font-size: 14px;
+}
+
+.eventos {
+  scroll-behavior: smooth;
+}
+
+.scroll span {
+  font-size: 24px;
+  display: block;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+
+/* ==============================================
+   🔹 SECCIÓN: SOBRE CON EFECTO DE APERTURA
+   ============================================== */
+.sobre {
+  width: 100%;
+  max-width: 420px;
+  height: 90vh;
+  max-height: 720px;
+  margin: auto;
+  position: relative;
+  background: #f2f2f2;
+  box-shadow: 0 25px 60px rgba(0,0,0,.25);
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+/* Solapas del sobre */
+.solapa {
+  position: absolute;
+  inset: 0;
+  background: #e8e8e8;
+  transition: transform 1.3s ease;
+  z-index: 3;
+}
+
+.solapa-izq {
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.solapa-der {
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+}
+
+/* Sello del sobre */
+.sello {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #d4af37, #b8902e);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  color: #4b3a14;
+  font-family: 'Great Vibes', cursive;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  box-shadow: inset 0 0 8px rgba(0,0,0,.4);
+}
+
+/* Carta dentro del sobre */
+.carta {
+  position: absolute;
+  inset: 0;
+  background: white;
+  transform: translateY(100%);
+  transition: transform 1.3s ease;
+  z-index: 1;
+  overflow-y: auto;
+}
+
+/* Estado cuando el sobre está abierto */
+.sobre.abierto .solapa-izq {
+  transform: translateX(-120%);
+}
+
+.sobre.abierto .solapa-der {
+  transform: translateX(120%);
+}
+
+.sobre.abierto .sello {
+  opacity: 0;
+}
+
+.sobre.abierto .carta {
+  transform: translateY(0);
+}
+
+
+/* ==============================================
+   🔹 SECCIÓN: MENSAJE DE LOS NOVIOS
+   ============================================== */
+.seccion-mensaje {
+  background: #00674F;
+  color: white;
+  padding: 70px 30px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.8;
+  margin-bottom: 0;
+}
+
+.seccion-mensaje .corazon {
+  margin-top: 25px;
+  font-size: 22px;
+}
+
+.seccion-mensaje {
+  margin-top: -5px;
+}
+
+
+/* ==============================================
+   🔹 SECCIÓN: CONTADOR REGRESIVO
+   ============================================== */
+.contador {
+  position: relative;
+  background: url("ban.jpg") center/cover no-repeat;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.contador .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.contador-contenido {
+  position: relative;
+  color: white;
+  text-align: center;
+  z-index: 2;
+  margin-top: 20px;
+  transform: translateY(70px);
+}
+
+.contador-contenido h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.tiempo {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tiempo div {
+  text-align: center;
+}
+
+.tiempo span {
+  display: block;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.tiempo small {
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.texto-final {
+  font-family: 'Great Vibes', cursive;
+  font-size: 32px;
+  margin-top: 10px;
+}
+
+/* ==============================================
+   🔹 SECCIÓN: DÓNDE Y CUÁNDO (DISEÑO ESTILIZADO)
+   ============================================== */
+.seccion-donde-cuando {
+  background: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.titulo-donde-cuando {
+  font-family: 'Great Vibes', cursive;
+  font-size: 42px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.contenedor-evento-estilizado {
+  max-width: 400px;
+  margin: 0 auto 40px;
+  border: 1px solid #e0d6cd;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+}
+
+.imagen-evento {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.texto-evento {
+  padding: 30px 20px;
+}
+
+.titulo-evento {
+  font-family: 'Great Vibes', cursive;
+  font-size: 36px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.datos-evento {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.boton-mapa {
+  display: inline-block;
+  padding: 10px 25px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #cdb4db, #b68c5a);
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+  letter-spacing: 1px;
+  transition: transform .2s ease;
+}
+
+.boton-mapa:hover {
+  transform: translateY(-2px);
+}
+
+/* ==============================================
+   🔹 SECCIÓN: DETALLES DE LA CELEBRACIÓN (EFECTO LÍNEA DINÁMICA)
+   ============================================== */
+.detalles {
+  position: relative;
+  background: white;
+  padding: 60px 20px 80px;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Decoraciones doradas difusas de fondo */
+.detalles::before,
+.detalles::after {
+  content: "";
+  position: absolute;
+  background: url("gold-texture.png") center/cover;
+  opacity: 0.2;
+  z-index: 0;
+  width: 150px;
+  height: 150px;
+}
+
+.detalles::before {
+  top: 20%;
+  left: 25%;
+  transform: rotate(15deg);
+}
+
+.detalles::after {
+  bottom: 15%;
+  right: 20%;
+  width: 200px;
+  height: 200px;
+  transform: rotate(-10deg);
+}
+
+.titulo-detalles {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 100px;
+  position: relative;
+  z-index: 1;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+}
+
+.eventos {
+  position: relative;
+  max-width: 350px;
+  margin: 0 auto;
+  z-index: 1;
+  padding-left: 20px; /* Añadimos espacio a la izquierda de la sección */
+}
+
+/* Línea base (moverla a la izquierda) */
+.eventos::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 18%; /* CAMBIA ESTE VALOR: menor = más a la izquierda | mayor = más a la derecha */
+  width: 2px;
+  background: #e0d6cd;
+  z-index: 1;
+}
+
+/* Línea que se va coloreando (igual que la base) */
+.linea-color {
+  position: absolute;
+  top: 0;
+  left: 18%; /* MISMO VALOR QUE LA LÍNEA BASE */
+  width: 2px;
+  background: var(--dorado);
+  z-index: 2;
+  height: 0;
+  transition: height 0.8s ease;
+}
+
+/* Contenido de los eventos (ajustado a la nueva línea) */
+.evento {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: auto auto 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+  padding: 15px 0;
+  text-align: left;
+  padding-left: calc(18% + 40px); /* Espacio entre línea y texto: 18% (posición línea) + 40px (separación) */
+  min-height: 40px; /* Asegura espacio suficiente para el contenido */
+}
+
+
+.evento.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Punto con corazón (alineado a la línea) */
+.punto-corazon {
+  position: absolute;
+  top: 18px;
+  left: 18%; /* MISMO VALOR QUE LA LÍNEA BASE */
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e0d6cd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  z-index: 3;
+  transition: all 0.6s ease;
+}
+
+.evento.visible .punto-corazon {
+  background: var(--dorado); /* O color morado como en la imagen: #9d8ac7 */
+}
+
+/* Textos dentro de cada evento */
+.hora {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
+}
+
+
+/* Ajuste para que el texto no se corte */
+.evento h3 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px; /* Reducimos un poco el tamaño para que no se corte */
+  margin: 0 0 10px;
+  color: #333;
+  white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+}
+
+.evento img {
+  width: 350px;
+  height: auto;
+  margin-top: 15px;
+  margin-left: 0;
+  display: block;
+  filter: sepia(30%) hue-rotate(10deg); /* Toque dorado */
+}
+
+.evento .lugar {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ==============================================
+   🔹 SECCIÓN: VESTIMENTA
+   ============================================== */
+.seccion-vestimenta {
+  background: #fbf7f5;
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.titulo-vestimenta {
+  font-family: 'Great Vibes', cursive;
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.tipo-vestimenta {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 2px;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+.iconos-vestimenta {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+}
+
+.iconos-vestimenta img {
+  width: 120px;
+  max-width: 40vw;
+}
+
+/* Decoraciones doradas en las esquinas */
+.seccion-vestimenta::before,
+.seccion-vestimenta::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: url("gold-texture.png") center/cover no-repeat;
+  opacity: .6;
+}
+
+.seccion-vestimenta::before {
+  top: 0;
+  left: 0;
+}
+
+.seccion-vestimenta::after {
+  bottom: 0;
+  right: 0;
+}
+
+
+/* ==============================================
+   🔹 SECCIÓN: REGALOS
+   ============================================== */
+.seccion-regalos {
+  background: #fbf7f5;
+  padding: 80px 25px;
+  text-align: center;
+}
+
+.titulo-regalos {
+  font-family: 'Great Vibes', cursive;
+  font-size: 40px;
+  margin-bottom: 25px;
+}
+
+.texto-regalos {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 45px;
+}
+
+.opciones-regalos {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.regalo-item {
+  width: 140px;
+}
+
+.regalo-item img {
+  width: 100%;
+  max-width: 120px;
+  margin-bottom: 6px;
+}
+
+.regalo-item p {
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+/* Efecto hover en los ítems de regalo */
+.regalo-item {
+  transition: transform .3s ease;
+}
+
+.regalo-item:hover {
+  transform: translateY(-6px);
+}
+
+
+/* ==============================================
+   🔹 SECCIÓN: CONFIRMACIÓN DE ASISTENCIA
+   ============================================== */
+.seccion-confirmacion {
+  background: #fbf7f5;
+  padding: 20px 15px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.tarjeta-confirmacion {
+  background: #fafafa;
+  width: 100%;
+  max-width: 400px;
+  padding: 45px 30px;
+  border-radius: 26px;
+  border: 2px solid var(--dorado);
+  box-shadow: 0 25px 45px rgba(0,0,0,.18);
+    text-align: center;
+}
+
+.titulo-confirmacion {
+  font-family: 'Great Vibes', cursive;
+  font-size: 42px;
+  font-weight: normal;
+  color: #000;
+}
+
+
+.opciones-confirmacion {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.opciones-confirmacion button {
+  border: none;
+  padding: 14px 26px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #d4af37, #b68c5a);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(182,140,90,.45);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.opciones-confirmacion button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(182,140,90,.6);
+}
+
+
+.opciones button {
+  border: none;
+  padding: 12px 22px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #f7b2d9, #cdb4db);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* FORMULARIO ESPECÍFICO DE CONFIRMACIÓN */
+#formulario {
+  display: none;
+  margin-top: 30px;
+  background: white;
+  padding: 25px 20px;
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0,0,0,.15);
+  animation: fadeIn 0.6s ease forwards;
+}
+
+#formulario label {
+  font-size: 13px;
+  color: #777;
+  letter-spacing: 1px;
+}
+
+#formulario input,
+#formulario select {
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0 18px;
+  border-radius: 12px;
+  border: 1px solid #e2d6ec;
+  font-size: 14px;
+}
+
+#formulario input:focus,
+#formulario select:focus {
+  outline: none;
+  border-color: var(--dorado);
+}
+
+#formulario .enviar {
+  margin-top: 10px;
+  background: linear-gradient(135deg, #cdb4db, #b68c5a);
+  letter-spacing: 2px;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==============================================
+   🔹 SECCIÓN: GRACIAS (ESTILO BASE PARA CONTEXTO)
+   ============================================== */
+.gracias {
+  padding: 80px 20px;
+  background: #f8f5f0;
+  text-align: center;
+}
+
+.contenido-gracias h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.contenido-gracias p {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: #555;
+}
+
+/* ==============================================
+   🔹 SECCIÓN: IMAGEN FULL-WIDTH FINAL
+   ============================================== */
+.imagen-final {
+  width: 100%; /* Ocupa todo el ancho de la pantalla */
+  margin: 0; /* Sin márgenes extra */
+  padding: 0; /* Sin relleno */
+  overflow: hidden; /* Evita que la imagen se desborde si es muy grande */
+}
+
+.imagen-final img {
+  width: 100%; /* Ajusta la imagen al ancho del contenedor */
+  height: 100%; /* Ocupa todo el alto disponible */
+  object-fit: cover; /* Cubre el espacio sin deformar la imagen (recorta los bordes si es necesario) */
+  display: block; /* Elimina el espacio extra en la parte inferior de la imagen */
+}
+
+
+/* ==============================================
+   🔹 SECCIÓN: GRACIAS
+   ============================================== */
+.seccion-gracias {
+  background: #00674F;
+  padding: 70px 25px;
+  text-align: center;
+}
+
+.texto-gracias {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #fbfbfb;
+  opacity: .9;
+}
+
+.corazon-gracias {
+  display: block;
+  margin-top: 20px;
+  font-size: 22px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sobre" onclick="abrirSobre()">
+
+  <!-- solapas -->
+  <div class="solapa solapa-izq"></div>
+  <div class="solapa solapa-der"></div>
+
+  <!-- sello -->
+  <div class="sello">Abrir</div>
+
+  <!-- carta -->
+  <div class="carta">
+    <div class="contenedor">
+      <section class="hero">
+        <img src="portadaaa.jpg" alt="Nuestra foto">
+
+         <div class="hero-text">
+         <span class="subtitulo">NOS CASAMOS</span>
+         <h1>Jakson  & Yeni</h1>
+         <p class="fecha">15 · FEBRERO · 2026</p>
+         </div>
+
+         <div class="scroll">
+         <span>⌄</span>
+         <p>DESLIZA</p>
+        </div>
+      </section>
+
+      <section class="seccion-mensaje">
+        <p>
+          Dios te bendiga.
+        </p>
+        <p>
+         Te invitamos a celebrar junto a nosotros el inicio de una nueva etapa en nuestras vidas,
+         llena de sueños, metas y grandes logros.
+       </p>
+
+      <div class="corazon">🤍</div>
+     </section>
+
+     <section class="contador">
+       <div class="overlay"></div>
+
+       <div class="contador-contenido">
+       <h2>Faltan</h2>
+
+        <div class="tiempo">
+         <div>
+          <span id="dias">00</span>
+          <small>DÍAS</small>
+         </div>
+       <div>
+          <span id="horas">00</span>
+          <small>HRS</small>
+       </div>
+       <div>
+          <span id="minutos">00</span>
+          <small>MIN</small>
+       </div>
+       <div>
+          <span id="segundos">00</span>
+          <small>SEG</small>
+       </div>
+      </div>
+
+       <p class="texto-final">para nuestra boda</p>
+      </div>
+     </section>
+
+     <!-- SECCIÓN: DÓNDE Y CUÁNDO -->
+    <div class="seccion-donde-cuando">
+      <h2 class="titulo-donde-cuando">Dónde y Cuándo</h2>
+
+     <!-- EVENTO 1: CEREMONIA RELIGIOSA -->
+      <div class="contenedor-evento-estilizado">
+        <img src="lugar.jpg" alt="Finca" class="imagen-evento">
+        <div class="texto-evento">
+            <h3 class="titulo-evento">Ceremonia Cristiana</h3>
+            <p class="datos-evento">
+                15 de Febrero de 2026<br>
+                5:00 PM<br><br>    
+                Finca Villa Mary<br>
+                Km 1.7 Vía La Cascada<br>
+                Ibagué – Tolima
+            </p>
+          <a class="boton" href="https://maps.app.goo.gl/2fgGpU8hhbpEZRkz8" target="_blank">
+            VER MAPA
+          </a>
+        </div>
+      </div>
+
+        <!-- DETALLES BODA -->
+         <section class="detalles">
+  <h2 class="titulo-detalles">
+    Te compartimos los detalles<br>de la celebración
+  </h2>
+
+  <div class="eventos" id="eventos">
+    <!-- Línea que se va coloreando -->
+    <div class="linea-color"></div>
+
+    <!-- Ceremonia Religiosa -->
+    <article class="evento">
+      <div class="punto-corazon">❤️</div>
+      <span class="hora">5:00 HRS</span>
+      <h3>Inicio</h3>
+      <img src="12.png" alt="Inicio" style="width:50px;">
+    </article>
+
+    <!-- Presentación -->
+    <article class="evento">
+      <div class="punto-corazon">❤️</div>
+      <span class="hora">6:30 HRS</span>
+      <h3>Ceremonia Cristiana</h3>
+      <img src="8.png" alt="Ceremonia Cristiana" style="width:50px;">
+      
+    </article>
+
+    <!-- Cena -->
+    <article class="evento">
+      <div class="punto-corazon">❤️</div>
+      <span class="hora">8:00 HRS</span>
+      <h3>Cena</h3>
+      <img src="10.png" alt="Cena" style="width:50px;">
+     
+    </article>
+  </div>
+</section>
+      
+      <section class="seccion-vestimenta">
+
+       <h2 class="titulo-vestimenta">Código de vestimenta</h2>
+       <p class="tipo-vestimenta">FORMAL</p>
+
+       <div class="iconos-vestimenta">
+          <img src="vestido.png" alt="Vestido formal">
+          <img src="traje.png" alt="Traje formal">
+      </div>
+
+      </section>
+
+      <section class="seccion-regalos">
+
+        <h2 class="titulo-regalos">Regalos</h2>
+
+        <p class="texto-regalos">
+                Nada nos haría más felices que contar<br> 
+                contigo en este día tan especial.<br>
+                El regalo es opcional, pero si deseas<br> 
+                tener un detalle con nosotros,<br>
+                aquí te dejamos algunas ideas.<br>
+        </p>
+
+        <div class="opciones-regalos">
+
+        <div class="regalo-item">
+          <img src="sobres.png" alt="Lluvia de sobres">
+          <p>Lluvia de sobres</p>
+        </div>
+
+        <div class="regalo-item">
+           <img src="regalo.png" alt="Regalo">
+        <p>Detalle especial</p>
+        </div>
+
+        </div>
+
+      </section>
+      
+        <!-- CONFIRMACIÓN -->
+      <section class="seccion-confirmacion">
+
+        <div class="tarjeta-confirmacion">
+
+        <h3 class="titulo-confirmacion">Confirma tu Asistencia</h3>
+
+         <div class="opciones-confirmacion">
+          <button onclick="mostrarFormulario(event)">Formulario</button>
+          <button onclick="confirmarWhats(event)">WhatsApp</button>
+
+         </div>
+
+        <!-- FORMULARIO -->
+         <form id="formulario" onclick="event.stopPropagation()">
+
+          <label>Nombre Completo</label>
+          <input id="nombre" required>
+
+          <label>Correo Electrónico</label>
+          <input id="correo" type="email">
+
+
+          <label>Acompañantes</label>
+          <select id="acompanantes">
+            <option>0</option>  
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6+</option>
+          </select>
+
+          <label>¿Asistirás?</label>
+          <select id="asiste">
+            <option>Sí, allá estaré</option>
+            <option>No, no puedo</option>
+          </select>
+
+          <button class="enviar" type="button" onclick="enviarFormulario()">
+           Enviar Confirmación
+          </button>
+         </form>
+
+        </div>
+      </section>
+
+     <!-- ==============================================
+     SECCIÓN: GRACIAS
+     ============================================== -->
+<section class="gracias">
+  <div class="contenido-gracias">
+    <h2>¡Muchas gracias por ser parte de nuestro día especial!</h2>
+    <p>Esperamos compartir este momento único contigo</p>
+  </div>
+</section>
+
+<!-- ==============================================
+     SECCIÓN: IMAGEN FULL-WIDTH (DESPUÉS DE GRACIAS)
+     ============================================== -->
+<section class="imagen-final">
+  <!-- Reemplaza "tu-imagen-final.jpg" por la ruta de tu archivo -->
+  <img src="nosotros.jpg" alt="Imagen decorativa final">
+</section>
+
+
+<section class="seccion-gracias">
+        <p class="texto-gracias">
+             El que halla esposa halla el bien,<br> 
+            Y alcanza la benevolencia de Jehová.<br>
+ 
+             Proverbios 18:22<br>
+        </p>
+        <span class="corazon-gracias">🤍</span>
+      </section>
+
+      <!-- ==============================================
+     SECCIÓN: IMAGEN FULL-WIDTH (DESPUÉS DE GRACIAS)
+     ============================================== -->
+<section class="imagen-final">
+  <!-- Reemplaza "tu-imagen-final.jpg" por la ruta de tu archivo -->
+  <img src="portada.jpg" alt="Imagen decorativa final">
+</section>
+
+
+    </div> <!-- contenedor -->
+  </div> <!-- carta -->
+</div> <!-- envelope -->
+
+
+<script>
+const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbzjCstQqFCW9_Bxj2czcbYmkxcnKYx0CsD8k_eil4k6eGQTj7sauNProndqMKH066KCxg/exec";
+
+function mostrarFormulario(event) {
+  event.stopPropagation(); // ⛔ evita que el sobre capture el clic
+  const form = document.getElementById("formulario");
+  form.style.display = "block";
+  form.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function confirmarWhats(event) {
+  event.stopPropagation(); // ⛔ evita conflicto
+
+  const msg = encodeURIComponent(
+    "Hola, confirmo mi asistencia a tu boda 💍.%0A%0A" +
+    "👤 Nombre:%0A" +
+    "👨‍👩‍👧‍👦 Cantidad de personas que asistirán:"
+  );
+
+  window.open("https://wa.me/573176074331?text=" + msg, "_blank");
+}
+
+
+</script>
+
+<script>
+function enviarFormulario() {
+  const nombre = document.getElementById("nombre").value;
+  const correo = document.getElementById("correo").value;
+  const acompanantes = document.getElementById("acompanantes").value;
+  const asiste = document.getElementById("asiste").value;
+
+  const datos = {
+    nombre,
+    correo,
+    acompanantes,
+    asiste
+  };
+
+  fetch(URL_SCRIPT, {
+    method: "POST",
+    body: JSON.stringify(datos)
+  })
+  .then(() => {
+    alert("¡Confirmación enviada! 💖 Dios te bendiga");
+    document.getElementById("formulario").reset();
+  });
+}
+</script>
+
+<!-- 🎵 Música -->
+<div class="musica">
+  <audio id="audio" loop>
+    <source src="musica-boda.mpeg" type="audio/mpeg">
+  </audio>
+</div>
+
+<script>
+const audio = document.getElementById("audio");
+let reproduciendo = false;
+
+function abrirSobre() {
+  const sobre = document.querySelector(".sobre");
+  sobre.classList.add("abierto");
+
+  // 🔒 desactivar clics posteriores
+  sobre.onclick = null;
+  sobre.style.cursor = "default";
+
+  if (!reproduciendo) {
+    audio.play();
+    reproduciendo = true;
+  }
+}
+
+
+</script>
+
+<script>
+const fechaBoda = new Date("2026-02-15T17:00:00").getTime();
+
+setInterval(() => {
+  const ahora = new Date().getTime();
+  const diferencia = fechaBoda - ahora;
+
+  if (diferencia <= 0) return;
+
+  const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+  const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+  const segundos = Math.floor((diferencia / 1000) % 60);
+
+  document.getElementById("dias").innerText = dias;
+  document.getElementById("horas").innerText = horas;
+  document.getElementById("minutos").innerText = minutos;
+  document.getElementById("segundos").innerText = segundos;
+}, 1000);
+</script>
+
+
+<script>
+// Efecto de línea que se va coloreando y puntos que cambian de color
+const eventos = document.querySelectorAll('.evento');
+const lineaColor = document.querySelector('.linea-color');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Cálculo correcto de la altura
+      const altura = entry.target.offsetTop - entry.target.parentElement.offsetTop + entry.target.offsetHeight / 2;
+      lineaColor.style.height = `${altura}px`;
+    }
+  });
+}, { threshold: 0.2 });
+
+eventos.forEach(evento => observer.observe(evento));
+</script>
+
+
+
+
+
+</body>
+
+</html>
